@@ -12,7 +12,7 @@ class app {
 	    'appgroup':
 			ensure	=> present,
 			gid	=> 10100;
-	    }
+	}
 
 	file {
 		'/opt/appdir':
@@ -44,4 +44,5 @@ class app {
 			user	=> root,
 			minute	=> '*/30',
 			hour	=> '*';
+	}
 }
