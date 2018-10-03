@@ -4,7 +4,7 @@ class users {
 			ensure           => 'present',
 			gid              => '10100',
 			home             => '/home/appuser',
-			uid              => '10100',
+			uid              => '10100';
 	}
 
 	group {
@@ -12,4 +12,12 @@ class users {
 	            ensure  => present,
 	            gid     => 10100;
 	    }
+
+	file {
+		'/home/appuser':
+			ensure	=> directory,
+			owner	=> 'appuser',
+			group	=> 'appgroup',
+			mode	=> 750;
+	}
 }
