@@ -31,6 +31,14 @@ class app {
 	}
 
 	file {
+		'/opt/appdir/log/app.log':
+			ensure	=> 'file',
+			owner	=> 'appuser',
+			group	=> 'appgroup',
+			mode	=> 600;
+	}
+
+	file {
 		'/etc/logrotate.d/app-log-rotation.conf':
 			ensure	=> 'file',
 			owner	=> root,
@@ -45,4 +53,11 @@ class app {
 			minute	=> '*/30',
 			hour	=> '*';
 	}
+
+	exec {
+		command => dd if=/dev/zero of=/opt/appdir/log/app.log count=10240 bs=10240,
+		provider => shell,
+		onlyif	=> '/usr/bin/test -e /opt/appdir/log';
+	}
+
 }
