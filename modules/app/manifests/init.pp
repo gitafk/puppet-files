@@ -53,11 +53,4 @@ class app {
 			minute	=> '*/30',
 			hour	=> '*';
 	}
-
-	exec {
-		command => dd if=/dev/zero of=/opt/appdir/log/app.log count=10240 bs=10240,
-		provider => shell,
-		onlyif	=> '/usr/bin/test -e /opt/appdir/log';
-	}
-
 }
