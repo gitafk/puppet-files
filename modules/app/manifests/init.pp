@@ -39,16 +39,25 @@ class app {
 	}
 
 	file {
-		'/etc/logrotate.d/app-log-rotation.conf':
+		'/opt/scripts':
+			ensure	=> directory,
+			owner	=> 'root',
+			group	=> 'root',
+			mode	=> 750;
+	}
+
+	file {
+		'/opt/scripts/app-log-check.sh':
 			ensure	=> 'file',
 			owner	=> root,
 			group	=> root,
-			source	=> [ 'puppet:///modules/app/app-log-rotation.conf' ];
+			mode	=> 700,
+			source	=> [ 'puppet:///modules/app/app-log-check.sh' ];
 	}
 
 	cron {
-		'app_logrotate':
-			command => '/usr/sbin/logrotate /etc/logrotate.d/app-log-rotation.conf',
+		'app_log_check':
+			command => '/opt/scripts/app-log-check.sh >> /tmp/app-log-check.log',
 			user	=> root,
 			minute	=> '*/30',
 			hour	=> '*';
