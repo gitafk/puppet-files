@@ -57,7 +57,7 @@ class app {
 
 	cron {
 		'app_log_check':
-			command => '/opt/scripts/app-log-check.sh >> /tmp/app-log-check.log',
+			command => '/opt/scripts/app-log-check.sh >> /tmp/app-log-check.log 2>&1',
 			user	=> root,
 			minute	=> '*/30',
 			hour	=> '*';
